@@ -183,6 +183,10 @@ app.post('/api/create-checkout-session', async (req, res) => {
 
     // Create checkout session
     console.log(`Creating Stripe checkout session with priceId: ${priceId}`);
+    
+    // Use Railway backend URL for success/cancel pages
+    const baseUrl = process.env.BASE_URL || 'https://math-notation-ai-backend-production.up.railway.app';
+    
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
       payment_method_types: ['card'],
@@ -193,8 +197,8 @@ app.post('/api/create-checkout-session', async (req, res) => {
         },
       ],
       mode: 'subscription',
-      success_url: `${req.headers.origin || 'chrome-extension://YOUR_EXTENSION_ID'}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${req.headers.origin || 'chrome-extension://YOUR_EXTENSION_ID'}/cancel`,
+      success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${baseUrl}/cancel`,
       metadata: {
         userId,
         plan
@@ -525,6 +529,161 @@ app.get('/api/admin/check-stripe', (req, res) => {
     webhookSecret: !!process.env.STRIPE_WEBHOOK_SECRET,
     keyPrefix: process.env.STRIPE_SECRET_KEY ? process.env.STRIPE_SECRET_KEY.substring(0, 7) : 'NOT_SET'
   });
+});
+
+// Success page route
+app.get('/success', (req, res) => {
+  res.send(`
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Successful - Math Notation AI</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .container {
+      background: white;
+      border-radius: 16px;
+      padding: 48px;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 24px;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: scaleIn 0.5s ease-out;
+    }
+    @keyframes scaleIn { from { transform: scale(0); } to { transform: scale(1); } }
+    .checkmark {
+      width: 40px;
+      height: 40px;
+      stroke: white;
+      stroke-width: 3;
+      fill: none;
+      stroke-linecap: round;
+      animation: draw 0.5s ease-out 0.3s forwards;
+      stroke-dasharray: 100;
+      stroke-dashoffset: 100;
+    }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+    h1 { font-size: 28px; font-weight: 700; color: #1e293b; margin-bottom: 16px; }
+    p { font-size: 16px; line-height: 1.6; color: #64748b; margin-bottom: 32px; }
+    .close-btn {
+      background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+      color: white;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .close-btn:hover { transform: translateY(-2px); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="success-icon">
+      <svg class="checkmark" viewBox="0 0 52 52">
+        <path d="M14 27l8 8 16-16" />
+      </svg>
+    </div>
+    <h1>🎉 Payment Successful!</h1>
+    <p>Your Math Notation AI Premium subscription is now active. You now have access to 500 explanations per day.</p>
+    <button class="close-btn" onclick="window.close()">Close & Start Using</button>
+    <p style="margin-top: 24px; font-size: 14px; color: #94a3b8;">
+      You can close this tab and start using your premium features immediately.
+    </p>
+  </div>
+  <script>setTimeout(() => window.close(), 10000);</script>
+</body>
+</html>
+  `);
+});
+
+// Cancel page route
+app.get('/cancel', (req, res) => {
+  res.send(`
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Cancelled - Math Notation AI</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #64748b 0%, #94a3b8 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .container {
+      background: white;
+      border-radius: 16px;
+      padding: 48px;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+    .icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 24px;
+      background: #f1f5f9;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    h1 { font-size: 28px; font-weight: 700; color: #1e293b; margin-bottom: 16px; }
+    p { font-size: 16px; line-height: 1.6; color: #64748b; margin-bottom: 32px; }
+    .close-btn {
+      background: #64748b;
+      color: white;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="icon">
+      <svg width="40" height="40" fill="none" stroke="#64748b" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </div>
+    <h1>Payment Cancelled</h1>
+    <p>No charges have been made. You can still use the free tier with 10 daily explanations.</p>
+    <button class="close-btn" onclick="window.close()">Close This Tab</button>
+  </div>
+  <script>setTimeout(() => window.close(), 5000);</script>
+</body>
+</html>
+  `);
 });
 
 // Start server
