@@ -615,8 +615,8 @@ app.get('/success', (req, res) => {
         <path d="M14 27l8 8 16-16" />
       </svg>
     </div>
-    <h1>🎉 Payment Successful!</h1>
-    <p>Your Math Notation AI Premium subscription is now active. You now have access to 500 explanations per day.</p>
+    <h1>Payment Successful</h1>
+    <p>Your Math Notation AI Premium subscription is now active. You now have access to 500 queries per day.</p>
     <button class="close-btn" onclick="window.close()">Close & Start Using</button>
     <p style="margin-top: 24px; font-size: 14px; color: #94a3b8;">
       You can close this tab and start using your premium features immediately.

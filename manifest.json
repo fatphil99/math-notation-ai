@@ -17,11 +17,7 @@
     }
   },
   "host_permissions": [
-    "http://localhost:3000/*",
-    "https://*.railway.app/*",
-    "https://*.vercel.app/*",
-    "https://*.ondigitalocean.app/*",
-    "https://*.run.app/*"
+    "https://math-notation-ai-backend-production.up.railway.app/*"
   ],
   "content_scripts": [
     {

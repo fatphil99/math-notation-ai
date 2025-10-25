@@ -515,48 +515,46 @@ class MathNotationAI {
       <div class="tooltip-header">
         <button class="tooltip-close">×</button>
       </div>
-      <div class="tooltip-content" style="text-align: center; padding: 35px 25px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;">
-        <div style="width: 60px; height: 60px; margin: 0 auto 20px; background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+      <div class="tooltip-content" style="text-align: center; padding: 30px 24px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;">
+        <div style="width: 50px; height: 50px; margin: 0 auto 18px; background: #1e293b; border-radius: 4px; display: flex; align-items: center; justify-content: center;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
             <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
           </svg>
         </div>
-        <h2 style="color: #1e293b; margin: 0 0 12px 0; font-size: 24px; font-weight: 600; letter-spacing: -0.025em;">
-          Daily Usage Limit Reached
+        <h2 style="color: #1e293b; margin: 0 0 10px 0; font-size: 18px; font-weight: 600;">
+          Daily Limit Reached
         </h2>
-        <p style="color: #64748b; margin: 0 0 25px 0; font-size: 15px; line-height: 1.6;">
+        <p style="color: #64748b; margin: 0 0 20px 0; font-size: 14px; line-height: 1.5;">
           ${this.escapeHtml(message)}
         </p>
-        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin-bottom: 25px; text-align: left;">
-          <p style="color: #1e293b; margin: 0 0 12px 0; font-size: 14px; font-weight: 600;">
-            Premium Plan Benefits
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 16px; margin-bottom: 20px; text-align: left;">
+          <p style="color: #1e293b; margin: 0 0 10px 0; font-size: 13px; font-weight: 600;">
+            Premium Features
           </p>
-          <ul style="color: #475569; margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.8;">
-            <li>500 explanations per day</li>
+          <ul style="color: #475569; margin: 0; padding-left: 20px; font-size: 13px; line-height: 1.7;">
+            <li>500 queries per day</li>
             <li>Advanced mathematical analysis</li>
             <li>Priority support</li>
-            <li>No advertisements</li>
+            <li>Ad-free experience</li>
           </ul>
         </div>
         <button id="upgradeLimitBtn" style="
-          background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+          background: #1e293b;
           color: white;
           border: none;
-          padding: 16px 32px;
+          padding: 12px 24px;
           border-radius: 6px;
-          font-size: 15px;
+          font-size: 14px;
           font-weight: 600;
           cursor: pointer;
           width: 100%;
-          box-shadow: 0 4px 12px rgba(30, 64, 175, 0.25);
           transition: all 0.2s ease;
-          letter-spacing: 0.025em;
-        " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(30, 64, 175, 0.35)'"
-           onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(30, 64, 175, 0.25)'">
+        " onmouseover="this.style.background='#334155'"
+           onmouseout="this.style.background='#1e293b'">
           Upgrade to Premium — $2.99/month
         </button>
-        <p style="color: #94a3b8; margin: 18px 0 0 0; font-size: 13px;">
-          Usage limit resets daily at 00:00 UTC
+        <p style="color: #94a3b8; margin: 14px 0 0 0; font-size: 12px;">
+          Limit resets daily at 00:00 UTC
         </p>
       </div>
     `;
