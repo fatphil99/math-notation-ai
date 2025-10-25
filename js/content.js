@@ -435,18 +435,18 @@ class MathNotationAI {
         // Clean up any broken LaTeX delimiters first
         let html = element.innerHTML;
 
+        // Convert any display math to inline math (safety fallback)
+        html = html.replace(/\\\[/g, '\\(');
+        html = html.replace(/\\\]/g, '\\)');
+        
         // Remove incomplete LaTeX blocks
-        html = html.replace(/\\\[([^\\]*)$/g, ''); // Incomplete display block at end
         html = html.replace(/\\\(([^\\]*)$/g, ''); // Incomplete inline block at end
 
         element.innerHTML = html;
 
         window.renderMathInElement(element, {
           delimiters: [
-            {left: '\\[', right: '\\]', display: true},
-            {left: '\\(', right: '\\)', display: false},
-            {left: '$$', right: '$$', display: true},
-            {left: '$', right: '$', display: false}
+            {left: '\\(', right: '\\)', display: false}
           ],
           throwOnError: false,
           errorColor: '#ef4444',
@@ -454,10 +454,14 @@ class MathNotationAI {
           trust: false,
           macros: {}
         });
+        
+        console.log('LaTeX rendered successfully');
       } catch (e) {
         console.error('LaTeX rendering error:', e);
         // Don't crash - just show the raw text
       }
+    } else {
+      console.error('KaTeX renderMathInElement not available');
     }
   }
 

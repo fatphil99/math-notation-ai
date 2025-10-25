@@ -364,19 +364,21 @@ The key insight or intuition - the "aha!" moment that makes it click (1-2 senten
 A concrete, fully worked example with actual numbers showing step-by-step calculation.
 
 CRITICAL FORMATTING RULES:
-- ONLY use inline LaTeX with \\( ... \\) - NEVER EVER use \\[ ... \\], $$ ... $$, or any display math delimiters
-- Even for equations on their own line, use \\( ... \\) not \\[ ... \\]
-- For multi-step calculations, put each step on a new line with plain text like "First, \\( step1 \\). Then, \\( step2 \\)."
-- Keep LaTeX expressions simple - break complex formulas into smaller inline pieces
+- ONLY use inline LaTeX with \\( and \\) delimiters
+- NEVER use \\[, \\], $$, or $ delimiters
+- Even for equations on their own line, wrap them with \\( and \\) only
+- Write each equation or formula inline like: \\( x = 5 \\)
+- For multi-step calculations, use separate lines with text: "First, \\( step1 \\). Then, \\( step2 \\)."
+- Keep LaTeX expressions simple and short
 - Aim for 100-250 words (more for complex multi-part equations)
 - ALWAYS complete your sentences - never cut off mid-explanation
 - Use plain English between math expressions
 - Focus on conceptual understanding, not just symbol manipulation
 
-EXAMPLE FORMAT:
+EXAMPLE FORMAT (notice ONLY \\( and \\) are used, never \\[ or \\]):
 
 **What it means:**
-\\( \\nabla \\cdot \\vec{F} \\) measures how much a vector field spreads out or converges at each point.
+The expression \\( \\nabla \\cdot \\vec{F} \\) measures how much a vector field spreads out or converges at each point.
 
 **Breaking it down:**
 - \\( \\nabla \\cdot \\) = divergence operator (pronounced "del dot")
@@ -387,15 +389,9 @@ EXAMPLE FORMAT:
 Positive divergence means flow is spreading out (like a source), negative means converging (like a sink), zero means steady flow.
 
 **Example:**
-For \\( \\vec{F} = (x, y, 0) \\), we calculate each partial derivative.
+For \\( \\vec{F} = (x, y, 0) \\), we calculate each partial derivative. First, \\( \\frac{\\partial x}{\\partial x} = 1 \\). Then, \\( \\frac{\\partial y}{\\partial y} = 1 \\). Finally, \\( \\frac{\\partial 0}{\\partial z} = 0 \\). Adding these: \\( 1 + 1 + 0 = 2 \\) everywhere, indicating constant outward flow.
 
-First, \\( \\frac{\\partial x}{\\partial x} = 1 \\).
-
-Then, \\( \\frac{\\partial y}{\\partial y} = 1 \\).
-
-Finally, \\( \\frac{\\partial 0}{\\partial z} = 0 \\).
-
-Adding these: \\( 1 + 1 + 0 = 2 \\) everywhere, indicating constant outward flow.`
+REMEMBER: Use ONLY \\( and \\) for ALL math, never \\[ \\] or $$.`
         },
         {
           role: 'user',
@@ -408,7 +404,13 @@ Adding these: \\( 1 + 1 + 0 = 2 \\) everywhere, indicating constant outward flow
       temperature: 0.3
     });
 
-    const explanation = completion.choices[0].message.content.trim();
+    let explanation = completion.choices[0].message.content.trim();
+    
+    // Fix any display math delimiters that OpenAI might have used despite instructions
+    explanation = explanation.replace(/\\\[/g, '\\(');
+    explanation = explanation.replace(/\\\]/g, '\\)');
+    explanation = explanation.replace(/\$\$/g, '\\(');  // Also fix $$ if it appears
+    
     const response = {
       symbol,
       explanation,
