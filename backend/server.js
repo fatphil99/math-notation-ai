@@ -208,6 +208,11 @@ app.post('/api/create-checkout-session', async (req, res) => {
       metadata: {
         userId,
         plan
+      },
+      // Set business name for checkout page
+      payment_intent_data: undefined, // Not used in subscription mode
+      subscription_data: {
+        description: 'Math Notation AI Premium Subscription'
       }
     });
 
