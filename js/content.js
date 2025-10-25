@@ -592,7 +592,6 @@ class MathNotationAI {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               userId: userId,
-              email: 'user@example.com', // User will enter email in Stripe checkout
               plan: 'monthly'
             })
           });

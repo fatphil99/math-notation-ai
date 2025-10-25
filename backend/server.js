@@ -117,10 +117,16 @@ app.get('/health', (req, res) => {
 // Stripe: Create checkout session
 app.post('/api/create-checkout-session', async (req, res) => {
   try {
-    const { userId, email, plan } = req.body;
+    const { userId, plan } = req.body;
+    let { email } = req.body;
 
-    if (!userId || !email || !plan) {
-      return res.status(400).json({ error: 'userId, email, and plan are required' });
+    if (!userId || !plan) {
+      return res.status(400).json({ error: 'userId and plan are required' });
+    }
+
+    // Email is optional - Stripe will collect it during checkout
+    if (!email) {
+      email = `user_${userId}@temp.mathnotationai.com`;
     }
 
     // Check Stripe configuration
@@ -438,13 +444,17 @@ async function handleCheckoutComplete(session) {
   const customerId = session.customer;
   const subscriptionId = session.subscription;
 
-  // Retrieve subscription details
+  // Retrieve customer and subscription details to get the real email
+  const customer = await stripe.customers.retrieve(customerId);
   const subscription = await stripe.subscriptions.retrieve(subscriptionId);
 
-  // Update user in database
+  console.log(`Customer email from Stripe: ${customer.email}`);
+
+  // Update user in database with real email from Stripe
   await User.findOneAndUpdate(
     { userId },
     {
+      email: customer.email, // Update with real email from Stripe checkout
       stripeCustomerId: customerId,
       'subscription.status': 'premium',
       'subscription.stripeSubscriptionId': subscriptionId,
@@ -456,7 +466,7 @@ async function handleCheckoutComplete(session) {
     { upsert: true }
   );
 
-  console.log(`✅ User ${userId} upgraded to ${plan} plan`);
+  console.log(`✅ User ${userId} upgraded to ${plan} plan with email ${customer.email}`);
 }
 
 async function handleSubscriptionChange(subscription) {
