@@ -5,7 +5,8 @@
   "description": "Screenshot any math content - from symbols to equations - for instant AI explanations and contextual understanding.",
   "permissions": [
     "storage",
-    "activeTab"
+    "activeTab",
+    "scripting"
   ],
   "commands": {
     "screenshot-explain": {
