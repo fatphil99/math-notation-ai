@@ -515,23 +515,23 @@ class MathNotationAI {
       <div class="tooltip-header">
         <button class="tooltip-close">×</button>
       </div>
-      <div class="tooltip-content" style="text-align: center; padding: 30px 24px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;">
-        <div style="width: 50px; height: 50px; margin: 0 auto 18px; background: #1e293b; border-radius: 4px; display: flex; align-items: center; justify-content: center;">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+      <div class="tooltip-content" style="text-align: center; padding: 28px 24px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;">
+        <div style="width: 48px; height: 48px; margin: 0 auto 16px; background: #111827; border-radius: 2px; display: flex; align-items: center; justify-content: center;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
             <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
           </svg>
         </div>
-        <h2 style="color: #1e293b; margin: 0 0 10px 0; font-size: 18px; font-weight: 600;">
+        <h2 style="color: #111827; margin: 0 0 10px 0; font-size: 17px; font-weight: 600;">
           Daily Limit Reached
         </h2>
-        <p style="color: #64748b; margin: 0 0 20px 0; font-size: 14px; line-height: 1.5;">
+        <p style="color: #374151; margin: 0 0 18px 0; font-size: 14px; line-height: 1.5;">
           ${this.escapeHtml(message)}
         </p>
-        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 16px; margin-bottom: 20px; text-align: left;">
-          <p style="color: #1e293b; margin: 0 0 10px 0; font-size: 13px; font-weight: 600;">
+        <div style="background: #f9fafb; border: 1px solid #d1d5db; border-radius: 4px; padding: 14px; margin-bottom: 18px; text-align: left;">
+          <p style="color: #111827; margin: 0 0 10px 0; font-size: 13px; font-weight: 600;">
             Premium Features
           </p>
-          <ul style="color: #475569; margin: 0; padding-left: 20px; font-size: 13px; line-height: 1.7;">
+          <ul style="color: #374151; margin: 0; padding-left: 20px; font-size: 12px; line-height: 1.7;">
             <li>500 queries per day</li>
             <li>Advanced mathematical analysis</li>
             <li>Priority support</li>
@@ -539,21 +539,21 @@ class MathNotationAI {
           </ul>
         </div>
         <button id="upgradeLimitBtn" style="
-          background: #1e293b;
+          background: #111827;
           color: white;
           border: none;
           padding: 12px 24px;
-          border-radius: 6px;
+          border-radius: 4px;
           font-size: 14px;
           font-weight: 600;
           cursor: pointer;
           width: 100%;
-          transition: all 0.2s ease;
-        " onmouseover="this.style.background='#334155'"
-           onmouseout="this.style.background='#1e293b'">
+          transition: background 0.2s ease;
+        " onmouseover="this.style.background='#1f2937'"
+           onmouseout="this.style.background='#111827'">
           Upgrade to Premium — $2.99/month
         </button>
-        <p style="color: #94a3b8; margin: 14px 0 0 0; font-size: 12px;">
+        <p style="color: #6b7280; margin: 12px 0 0 0; font-size: 12px;">
           Limit resets daily at 00:00 UTC
         </p>
       </div>

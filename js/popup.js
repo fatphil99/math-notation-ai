@@ -154,27 +154,27 @@ class PopupManager {
   renderFreeInterface(usage, limit, remaining) {
     const progress = Math.min(100, (usage / limit) * 100);
     const isLimitReached = remaining === 0;
-    const progressColor = isLimitReached ? '#dc2626' : '#2563eb';
+    const progressColor = isLimitReached ? '#dc2626' : '#4b5563';
 
     this.content.innerHTML = `
-      <div class="stats-card">
+      <div class="stats-card" style="background: #f9fafb; border: 1px solid #d1d5db;">
         <div class="stat-row">
           <span class="stat-label">Account Type</span>
-          <span class="stat-value" style="font-weight: 600; color: #64748b;">Free</span>
+          <span class="stat-value" style="font-weight: 600; color: #6b7280;">Free</span>
         </div>
       </div>
 
-      <div class="stats-card">
+      <div class="stats-card" style="border: 1px solid #e5e7eb;">
         <div class="stat-row">
           <span class="stat-label">Daily Usage</span>
           <span class="stat-value">${usage} / ${limit} queries</span>
         </div>
-        <div class="progress-bar">
+        <div class="progress-bar" style="background: #e5e7eb;">
           <div class="progress-fill" style="width: ${progress}%; background: ${progressColor}"></div>
         </div>
       </div>
 
-      <div class="stats-card">
+      <div class="stats-card" style="border: 1px solid #e5e7eb;">
         <div class="stat-row">
           <span class="stat-label">Remaining Today</span>
           <span class="stat-value" style="color: ${progressColor}; font-weight: 600;">${remaining}</span>
@@ -182,39 +182,40 @@ class PopupManager {
       </div>
 
       ${isLimitReached ? `
-        <div class="error-message" style="background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; padding: 12px; border-radius: 6px; margin-top: 12px; font-size: 13px;">
+        <div class="error-message" style="background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; padding: 12px; border-radius: 4px; margin-top: 12px; font-size: 13px;">
           Daily limit reached. Upgrade for continued access.
         </div>
       ` : ''}
 
       <button class="upgrade-btn" id="upgradeBtn" style="
-        background: #1e293b;
+        background: #111827;
         color: white;
         border: none;
         padding: 12px 20px;
-        border-radius: 6px;
+        border-radius: 4px;
         font-size: 13px;
         font-weight: 600;
         cursor: pointer;
         width: 100%;
         margin-top: 12px;
-        transition: all 0.2s ease;
-      ">
+        transition: background 0.2s ease;
+      " onmouseover="this.style.background='#1f2937'" onmouseout="this.style.background='#111827'">
         Upgrade to Premium — $2.99/month
       </button>
 
-      <div class="features-list" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 14px; margin-top: 14px;">
-        <p style="margin: 0 0 10px 0; font-weight: 600; color: #1e293b; font-size: 12px;">Premium Features</p>
-        <div class="feature" style="font-size: 12px; color: #475569; margin-bottom: 6px;">• 500 queries per day</div>
-        <div class="feature" style="font-size: 12px; color: #475569; margin-bottom: 6px;">• Advanced mathematical analysis</div>
-        <div class="feature" style="font-size: 12px; color: #475569; margin-bottom: 6px;">• Priority support</div>
-        <div class="feature" style="font-size: 12px; color: #475569;">• Ad-free experience</div>
+      <div class="features-list" style="background: #f9fafb; border: 1px solid #d1d5db; border-radius: 4px; padding: 14px; margin-top: 14px;">
+        <p style="margin: 0 0 10px 0; font-weight: 600; color: #111827; font-size: 12px;">Premium Features</p>
+        <div class="feature" style="font-size: 12px; color: #374151; margin-bottom: 6px;">• 500 queries per day</div>
+        <div class="feature" style="font-size: 12px; color: #374151; margin-bottom: 6px;">• Advanced mathematical analysis</div>
+        <div class="feature" style="font-size: 12px; color: #374151; margin-bottom: 6px;">• Priority support</div>
+        <div class="feature" style="font-size: 12px; color: #374151;">• Ad-free experience</div>
       </div>
 
-      <div class="help-text" style="color: #64748b; font-size: 12px; margin-top: 14px; line-height: 1.6;">
-        <strong style="color: #1e293b;">Usage:</strong><br>
-        <kbd style="background: #f1f5f9; padding: 2px 6px; border-radius: 3px; border: 1px solid #cbd5e1; font-family: monospace; font-size: 11px;">Cmd+Shift+Z</kbd> (Mac) or <kbd style="background: #f1f5f9; padding: 2px 6px; border-radius: 3px; border: 1px solid #cbd5e1; font-family: monospace; font-size: 11px;">Ctrl+Shift+Z</kbd> (Windows)<br>
-        Select mathematical notation for instant analysis.
+      <div class="help-text" style="color: #374151; font-size: 13px; margin-top: 14px; line-height: 1.7; background: #ffffff; border: 1px solid #e5e7eb; padding: 12px; border-radius: 4px;">
+        <strong style="color: #111827; display: block; margin-bottom: 8px;">Keyboard Shortcut:</strong>
+        <div style="margin-bottom: 4px;"><kbd style="background: #f3f4f6; padding: 4px 8px; border-radius: 2px; border: 1px solid #d1d5db; font-family: monospace; font-size: 12px; color: #111827;">Cmd+Shift+Z</kbd> <span style="color: #6b7280;">(Mac)</span></div>
+        <div style="margin-bottom: 8px;"><kbd style="background: #f3f4f6; padding: 4px 8px; border-radius: 2px; border: 1px solid #d1d5db; font-family: monospace; font-size: 12px; color: #111827;">Ctrl+Shift+Z</kbd> <span style="color: #6b7280;">(Windows)</span></div>
+        <span style="color: #6b7280; font-size: 12px;">Select mathematical notation for analysis</span>
       </div>
     `;
 
@@ -229,44 +230,45 @@ class PopupManager {
     const remaining = limit - usage;
 
     this.content.innerHTML = `
-      <div class="stats-card" style="background: #1e293b; color: white; border: none;">
+      <div class="stats-card" style="background: #f9fafb; border: 1px solid #d1d5db;">
         <div class="stat-row">
-          <span class="stat-label" style="color: rgba(255,255,255,0.9);">Account Type</span>
-          <span class="premium-badge" style="background: rgba(255,255,255,0.15); color: white; padding: 4px 12px; border-radius: 3px; font-size: 11px; font-weight: 600; letter-spacing: 0.5px;">PREMIUM</span>
+          <span class="stat-label">Account Type</span>
+          <span class="premium-badge" style="background: #111827; color: white; padding: 4px 12px; border-radius: 2px; font-size: 11px; font-weight: 600; letter-spacing: 0.5px;">PREMIUM</span>
         </div>
       </div>
 
-      <div class="stats-card">
+      <div class="stats-card" style="border: 1px solid #e5e7eb;">
         <div class="stat-row">
           <span class="stat-label">Daily Usage</span>
           <span class="stat-value">${usage} / ${limit} queries</span>
         </div>
-        <div class="progress-bar">
-          <div class="progress-fill" style="width: ${progress}%; background: #2563eb"></div>
+        <div class="progress-bar" style="background: #e5e7eb;">
+          <div class="progress-fill" style="width: ${progress}%; background: #4b5563"></div>
         </div>
       </div>
 
-      <div class="stats-card">
+      <div class="stats-card" style="border: 1px solid #e5e7eb;">
         <div class="stat-row">
           <span class="stat-label">Status</span>
-          <span class="stat-value" style="color: #059669; font-weight: 600;">Active</span>
+          <span class="stat-value" style="color: #111827; font-weight: 600;">Active</span>
         </div>
         <div class="stat-row">
           <span class="stat-label">Remaining Today</span>
-          <span class="stat-value" style="color: #1e293b; font-weight: 600;">${remaining}</span>
+          <span class="stat-value" style="color: #111827; font-weight: 600;">${remaining}</span>
         </div>
       </div>
 
-      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 14px; margin-top: 16px;">
-        <p style="margin: 0; color: #475569; font-size: 13px; line-height: 1.5;">
+      <div style="background: #f9fafb; border: 1px solid #d1d5db; border-radius: 4px; padding: 14px; margin-top: 16px;">
+        <p style="margin: 0; color: #374151; font-size: 13px; line-height: 1.5;">
           Premium subscription active. Access to enhanced mathematical analysis and priority support.
         </p>
       </div>
 
-      <div class="help-text" style="color: #64748b; font-size: 12px; margin-top: 16px; line-height: 1.6;">
-        <strong style="color: #1e293b;">Usage:</strong><br>
-        <kbd style="background: #f1f5f9; padding: 2px 6px; border-radius: 3px; border: 1px solid #cbd5e1; font-family: monospace; font-size: 11px;">Cmd+Shift+Z</kbd> (Mac) or <kbd style="background: #f1f5f9; padding: 2px 6px; border-radius: 3px; border: 1px solid #cbd5e1; font-family: monospace; font-size: 11px;">Ctrl+Shift+Z</kbd> (Windows)<br>
-        Select mathematical notation for instant analysis.
+      <div class="help-text" style="color: #374151; font-size: 13px; margin-top: 16px; line-height: 1.7; background: #ffffff; border: 1px solid #e5e7eb; padding: 12px; border-radius: 4px;">
+        <strong style="color: #111827; display: block; margin-bottom: 8px;">Keyboard Shortcut:</strong>
+        <div style="margin-bottom: 4px;"><kbd style="background: #f3f4f6; padding: 4px 8px; border-radius: 2px; border: 1px solid #d1d5db; font-family: monospace; font-size: 12px; color: #111827;">Cmd+Shift+Z</kbd> <span style="color: #6b7280;">(Mac)</span></div>
+        <div style="margin-bottom: 8px;"><kbd style="background: #f3f4f6; padding: 4px 8px; border-radius: 2px; border: 1px solid #d1d5db; font-family: monospace; font-size: 12px; color: #111827;">Ctrl+Shift+Z</kbd> <span style="color: #6b7280;">(Windows)</span></div>
+        <span style="color: #6b7280; font-size: 12px;">Select mathematical notation for analysis</span>
       </div>
     `;
   }
