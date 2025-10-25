@@ -1,0 +1,62 @@
+# Environment variables (CRITICAL - Contains API keys!)
+.env
+.env.local
+.env.production
+*.env
+
+# Dependencies
+node_modules/
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Build files
+dist/
+build/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Test files
+coverage/
+.nyc_output/
+
+# Backend specific
+backend/node_modules/
+backend/*.log
+backend/.env
+
+# Chrome extension - Keep these but exclude sensitive data
+# (These ARE needed in the repo)
+!manifest.json
+!icons/
+!js/
+!css/
+!lib/
+!popup.html
+
+# Exclude old backup files
+*-old.js
+*-backup.js
+server-old.js
+
+# Exclude ZIP files
+*.zip
+
+# Exclude screenshots for documentation (you can add these manually later)
+screenshots/
